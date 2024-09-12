@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8412350c-21b5-4f31-98a6-47b50f25e673}</ProjectGuid>
-    <RootNamespace>MyRBTree</RootNamespace>
+    <ProjectGuid>{b14bc154-80e1-4479-bd74-8d82807c99f5}</ProjectGuid>
+    <RootNamespace>VirtualFunction</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="MyRBTree.h" />
+    <ClCompile Include="VirtualFunction.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
