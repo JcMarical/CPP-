@@ -1,11 +1,12 @@
 
-#include <vector>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <stdexcept>
 
-template<class T> class MyVector {
+template<class T> 
+
+class MyVector {
 
 private:
 	T* m_data;
@@ -15,7 +16,7 @@ private:
 
 public:
 
-	//----------------»ù´¡º¯Êı-----------------
+	//----------------åŸºç¡€å‡½æ•°-----------------
 	//ctor
 	MyVector() :m_data(nullptr), m_capacity(0), m_size(0) {};
 
@@ -25,41 +26,41 @@ public:
 		delete[] m_data;
 	}
 
-	//copy constructor ¿½±´¹¹Ôì
-	MyVector(const MyVector& other) :m_capacity(other.m_capacity), m_size(other.m_size) //ÎªÊ²Ã´¿ÉÒÔ·ÃÎÊË½ÓĞ±äÁ¿ÄØ£¿
+	//copy constructor æ‹·è´æ„é€ 
+	MyVector(const MyVector& other) :m_capacity(other.m_capacity), m_size(other.m_size) //ä¸ºä»€ä¹ˆå¯ä»¥è®¿é—®ç§æœ‰å˜é‡å‘¢ï¼Ÿ
 	{
 		m_data = new T[m_capacity];
-		std::copy(other.m_data, other.m_data + m_size, m_data); //ÒÆ¶¯Êı¾İ
+		std::copy(other.m_data, other.m_data + m_size, m_data); //ç§»åŠ¨æ•°æ®
 	}
 
 
 
-	//Copy Assignment  ¿½±´¸³Öµ
+	//Copy Assignment  æ‹·è´èµ‹å€¼
 	MyVector& operator =(const MyVector& other)
 	{
-		//×Ô¼ì
+		//è‡ªæ£€
 		if (this != &other)
 		{
 			delete[] m_data;
 			m_capacity = other.m_capacity;
 			m_size = other.m_size;
 			m_data = new  T[m_capacity];
-			std::copy(other.m_data, other.m_data + m_size, m_data); //ÒÆ¶¯Êı¾İ
+			std::copy(other.m_data, other.m_data + m_size, m_data); //ç§»åŠ¨æ•°æ®
 
 		}
 		return *this;
 	}
-	//------------------ÔöÉ¾¸Ä²é-----------------
+	//------------------å¢åˆ æ”¹æŸ¥-----------------
 	void push_back(const T& value)
 	{
-		//ÏÈÅĞ¶ÏÈİÁ¿ÊÇ·ñ¹»ÓÃ
+		//å…ˆåˆ¤æ–­å®¹é‡æ˜¯å¦å¤Ÿç”¨
 		if (m_size == m_capacity)
 		{
-			//ÏÈÉêÇë¿Õ¼ä
+			//å…ˆç”³è¯·ç©ºé—´
 			reserve(m_capacity == 0 ? 1 : m_capacity << 1);
 		}
 
-		//²åÈëÊı¾İ
+		//æ’å…¥æ•°æ®
 		m_data[m_size++] = value;
 	}
 
@@ -74,10 +75,10 @@ public:
 	}
 
 	//public MyVector<T> operator[](const int& index)
-	//×¢Òâ£¬ÕâÊÇÊı×éÈ¡Öµ£¬·µ»ØµÄÊÇÒ»¸öÖµ
+	//æ³¨æ„ï¼Œè¿™æ˜¯æ•°ç»„å–å€¼ï¼Œè¿”å›çš„æ˜¯ä¸€ä¸ªå€¼
 	T& operator[](size_t index)
 	{
-		//ÏÈÅĞ¶ÏindexÊÇ·ñÔ½½ç
+		//å…ˆåˆ¤æ–­indexæ˜¯å¦è¶Šç•Œ
 		if (index >= m_size)
 		{
 			throw std::out_of_range("index out of range");
@@ -87,7 +88,7 @@ public:
 	}
 
 
-	//const °æ±¾µÄ·ÃÎÊ
+	//const ç‰ˆæœ¬çš„è®¿é—®
 	const T& operator[](size_t index) const
 	{
 		if (index >= m_size)
@@ -102,7 +103,7 @@ public:
 
 	T insert(size_t index, T value)
 	{
-		//ÏÈÅĞ¶ÏindexÊÇ·ñÔ½½ç
+		//å…ˆåˆ¤æ–­indexæ˜¯å¦è¶Šç•Œ
 		if (index > m_size)
 		{
 			throw std::out_of_range("index out of range");
@@ -114,7 +115,7 @@ public:
 
 		}
 
-		//ÒÆ¶¯Êı¾İ
+		//ç§»åŠ¨æ•°æ®
 		for (size_t i = m_size; i > index; i--)
 		{
 			m_data[i] = m_data[i - 1];
@@ -137,7 +138,7 @@ public:
 		m_size = 0;
 	}
 
-	///µü´úÆ÷Ö¸Õë
+	///è¿­ä»£å™¨æŒ‡é’ˆ
 	T* begin()
 	{
 		return m_data;
@@ -168,11 +169,11 @@ public:
 	}
 
 private:
-	//À©Èİº¯Êı
+	//æ‰©å®¹å‡½æ•°
 
 	void  reserve(size_t new_capacity)
 	{
-		//ÅĞ¶ÏÊÇ·ñĞèÒªÀ©Èİ
+		//åˆ¤æ–­æ˜¯å¦éœ€è¦æ‰©å®¹
 		if (new_capacity > m_capacity)
 		{
 			T* new_data = new T[new_capacity];
@@ -189,96 +190,3 @@ private:
 
 	}
 };
-
-int main()
-{
-	MyVector<int> myVector;
-
-	int N;
-	std::cin >> N;
-	getchar();
-
-
-
-	std::string line;
-	for (int i = 0; i < N; i++)
-	{
-		std::getline(std::cin, line);
-		std::istringstream iss(line);
-		std::string command;
-		iss >> command;
-
-		//push
-		if (command == "push")
-		{
-			int value;
-			iss >> value;
-			myVector.push_back(value);
-		}
-
-		if (command == "size")
-		{
-			std::cout << myVector.size() << std::endl;
-		}
-
-		if (command == "get")
-		{
-			int value;
-			iss >> value;
-
-
-			std::cout << myVector[value] << std::endl;
-		}
-
-		if (command == "insert")
-		{
-			int a, b;
-			iss >> a;
-			iss >> b;
-
-			myVector.insert(a, b);
-		}
-
-		if (command == "pop")
-		{
-			myVector.pop_back();
-		}
-
-		if (command == "clear")
-		{
-			myVector.clear();
-		}
-
-		if (command == "print")
-		{
-			if (myVector.size() == 0)
-			{
-				std::cout << "empty" << std::endl;
-			}
-			myVector.printElements();
-		}
-
-		if (command == "iterator")
-		{
-			if (myVector.size() == 0)
-			{
-				std::cout << "empty" << std::endl;
-			}
-			myVector.printElements();
-		}
-
-		if (command == "foreach")
-		{
-			if (myVector.size() == 0)
-			{
-				std::cout << "empty" << std::endl;
-			}
-			myVector.printElements();
-		}
-
-	}
-}
-
-
-
-

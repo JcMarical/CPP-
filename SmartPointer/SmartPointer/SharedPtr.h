@@ -1,24 +1,59 @@
 #pragma once
 
+//sharedptr
+
+//å†…å­˜
+//è®¡æ•°
+
+//operator->
+//operator*
+
+//release
+
+//æ˜¾å¼æ— å‚æ„é€ 
+//æ‹·è´æ„é€ 
+//èµ‹å€¼æ“ä½œç¬¦
+//ææ„å‡½æ•°
+
+//get()
+//use_count(ï¼‰
+
+
+
 
 template<typename T>
 class SharedPtr {
 private:
 	T* ptr_;
 	size_t* count_;
+
+private:
+	//é‡Šæ”¾å‡½æ•°
+	void release() {
+		if (count_ && --(*count_) == 0) {
+			delete ptr_;
+			delete count_;
+		}
+	}
 	
 public:
-	//¹¹Ôì
+	//è¿ç®—ç¬¦*
+	T& operator*() const { return *ptr_; }
+	//è¿ç®—ç¬¦->
+	T* operator->() const { return ptr_; }
+
+
+	//æ„é€ 
 		explicit SharedPtr(T* ptr = nullptr):ptr_(ptr),count_(ptr? new size_t(1): nullptr){}
 
-	//¿½±´¹¹Ôì
+	//æ‹·è´æ„é€ 
 		SharedPtr(const SharedPtr& other) : ptr_(other.ptr_), count_(other.count_) {
 			if (count_) {
 				++(*count);
 			}
 		}
 
-	//¸³Öµ²Ù×÷·û
+	//èµ‹å€¼æ“ä½œç¬¦
 		SharedPtr& operator=(const SharedPtr& other) {
 			if (this != &other) {
 				release();
@@ -33,32 +68,16 @@ public:
 		}
 
 
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 		~SharedPtr() {
 			release();
 	}
 
 
-	//ÔËËã·û*
-		T& operator*() const { return *ptr_; }
 
 
-	//ÔËËã·û->
-		T* operator->() const { return ptr_; }
-	//»ñÈ¡Ö¸Õë
+	//è·å–å†…å­˜
 		T* get() { return ptr_; }
-	//»ñÈ¡¼ÆÊı
-		T* use_count() const {return count_?*count_: 0}
-
-private:
-	//ÊÍ·Åº¯Êı
-	void release() {
-		if (count_ && --(*count_) == 0) {
-			delete ptr_;
-			delete count_;
-		}
-	}
-
-	T* ptr_;
-	size_t* count_;
+	//è·å–è®¡æ•°
+		size_t* use_count() const {return count_?*count_: 0}
 };
